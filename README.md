@@ -9,6 +9,7 @@
 - [License](#license)
 - [Contact](#contact)
 - [How to use](#how-to-use)
+- [Extension for Visual Studio Code](#extension-for-visual-studio-code)
 
 ## Introduction
 
@@ -142,3 +143,16 @@ FileTestCase(
 
 run_tests()
 ```
+## Extension for Visual Studio Code
+
+You can download a Visual Studio Code extension that will provide coloring when running tests.
+### assignment3.py
+```
+print('Hi')
+```
+You can run the tests with these buttons.
+![Buttons](https://github.com/moderouin/school_grader/blob/main/assets/extension2.PNG?raw=true)
+
+
+The result will look like this. When you hover on a test, you will see the Stack trace.
+![Result](https://github.com/moderouin/school_grader/blob/main/assets/extension1.PNG?raw=true)
