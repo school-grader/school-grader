@@ -22,6 +22,7 @@ Welcome to the Python Student Testing Framework! This README provides a brief ov
 - Ability to define custom tests and assertions
 - Clear and detailed feedback for students on test results
 - Display HTML report
+- Visual Studio Code extension
 
 ## Installation
 
