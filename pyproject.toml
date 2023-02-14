@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "school_grader"
-version = "2.0.2"
+version = "2.0.3"
 authors = [
   { name="Marc-Olivier Derouin", email="marcolivier.derouin@poulet-frit.com" },
 ]
@@ -19,5 +19,5 @@ classifiers = [
 keywords = ["testing", "test", "students", "school", "education", "framework", "python", "python3", "python3.7", "python3.8", "python3.9"]
 
 [project.urls]
-"Homepage" = "https://github.com/moderouin/school_grader"
-"Bug Tracker" = "https://github.com/moderouin/school_grader/issues"
+"Homepage" = "https://github.com/school-grader/school-grader"
+"Bug Tracker" = "https://github.com/school-grader/school-grader/issues"

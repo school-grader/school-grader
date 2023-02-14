@@ -90,11 +90,11 @@ run_tests()
 
 This will generate an HTML report that will automatically open in the browser.
 
-![HTML report](https://github.com/moderouin/school_grader/blob/main/assets/html_report1.PNG?raw=true)
+![HTML report](https://github.com/school-grader/school-grader/blob/main/assets/html_report1.PNG?raw=true)
 
 If there is an error in the student code, the report will look like this.
 
-![HTML report](https://github.com/moderouin/school_grader/blob/main/assets/html_report2.PNG?raw=true)
+![HTML report](https://github.com/school-grader/school-grader/blob/main/assets/html_report2.PNG?raw=true)
 
 You can also test for float variables.
 
@@ -151,8 +151,8 @@ You can download a Visual Studio Code extension that will provide coloring when 
 print('Hi')
 ```
 You can run the tests with these buttons.
-![Buttons](https://github.com/moderouin/school_grader/blob/main/assets/extension2.PNG?raw=true)
+![Buttons](https://github.com/school-grader/school-grader/blob/main/assets/extension2.PNG?raw=true)
 
 
 The result will look like this. When you hover on a test, you will see the Stack trace.
-![Result](https://github.com/moderouin/school_grader/blob/main/assets/extension1.PNG?raw=true)
+![Result](https://github.com/school-grader/school-grader/blob/main/assets/extension1.PNG?raw=true)
