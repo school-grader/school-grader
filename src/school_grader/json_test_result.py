@@ -1,4 +1,3 @@
-from abc import abstractmethod, ABC
 __author__ = "Marc-Olivier Derouin"
 __email__ = "marcolivier.derouin@poulet-frit.com"
 
