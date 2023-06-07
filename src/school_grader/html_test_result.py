@@ -88,7 +88,7 @@ HTML_END = (
 )
 
 
-def sanitize_html(html_string: str):
+def sanitize_html(html_string: str) -> str:
     return html_string.replace("<", "&lt;").replace(">", "&gt;")
 
 
@@ -99,7 +99,7 @@ class HTMLResult(ABC):
         self._test = test
 
     @abstractmethod
-    def generate_html(self):
+    def generate_html(self) -> str:
         """Generates the HTML result of a test."""
         return (
             "<tr>"
@@ -113,7 +113,7 @@ class HTMLSuccessResult(HTMLResult):
     def __init__(self, test):
         super().__init__(test)
 
-    def generate_html(self):
+    def generate_html(self) -> str:
         """Generates the HTML result of a successful test."""
         return (
             super().generate_html() +
@@ -130,7 +130,7 @@ class HTMLFailureResult(HTMLResult):
         super().__init__(test)
         self._stack_trace = stack_trace
 
-    def generate_html(self):
+    def generate_html(self) -> str:
         """Generates the HTML result of a failed test."""
         return (
             super().generate_html() +
@@ -147,7 +147,7 @@ class HTMLErrorResult(HTMLResult):
         super().__init__(test)
         self._stack_trace = stack_trace
 
-    def generate_html(self):
+    def generate_html(self) -> str:
         """Generates the HTML result of a failed test."""
         return f"""
         {super().generate_html()}

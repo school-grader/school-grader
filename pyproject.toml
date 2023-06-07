@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "school_grader"
-version = "4.0.6"
+version = "4.0.7"
 authors = [
   { name="Marc-Olivier Derouin", email="marcolivier.derouin@poulet-frit.com" },
 ]
