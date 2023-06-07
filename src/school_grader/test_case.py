@@ -63,11 +63,11 @@ class TestCase(unittest.TestCase, ABC):
     """Abstract base class for test cases."""
     tests_case = []
 
-    def __init__(self, test_name: str, timeout: float, fail_message: str):
+    def __init__(self, test_name: str, timeout_time: float, fail_message: str):
         super().__init__()
         self.tests_case.append(self)
         self.shortDescription = lambda: test_name
-        self._timeout = timeout
+        self._timeout_time = timeout_time
         self._fail_message = fail_message
         self._dirname = os.getcwd()
         self.line_number = inspect.currentframe().f_back.f_back.f_lineno
@@ -81,18 +81,18 @@ class TestCase(unittest.TestCase, ABC):
 class FileTestCase(TestCase):
     """Custom test case class for testing python code"""
 
-    def __init__(self, test_name: str, file_name: str, expected_output: List[Union[str, Equality]], mock_input: List[str] = [], timeout: float = 1, fail_message: str = None):
+    def __init__(self, test_name: str, file_name: str, expected_output: List[Union[str, Equality]], mock_input: List[str] = [], timeout_time: float = 1, fail_message: str = None):
         """
-        Initializes the test case with the given test name, file name, mock input, expected output, timeout and fail message
+        Initializes the test case with the given test name, file name, mock input, expected output, timeout_time and fail message
 
         :param test_name: name of the test
         :param file_name: name of the python file to be tested
         :param expected_output: list of str or Equality objects to be used as expected outputs
         :param mock_input: list of strings to be used as inputs
-        :param timeout: maximum time in seconds that the test can run
+        :param timeout_time: maximum time in seconds that the test can run
         :param fail_message: message to be displayed in case of failure
         """
-        super().__init__(test_name, timeout, fail_message)
+        super().__init__(test_name, timeout_time, fail_message)
         self._file_name = file_name
         self._mock_input = mock_input
         self._expected_output = expected_output
@@ -114,7 +114,7 @@ class FileTestCase(TestCase):
         return fake_input
 
     def runTest(self):
-        @timeout(self._timeout)
+        @timeout(self._timeout_time)
         def exec_test():
             with patch('builtins.input', self.override_input()), patch('sys.stdout', new=StringIO()) as fake_out:
                 try:
@@ -142,26 +142,26 @@ class FunctionTestCase(TestCase):
         test_name (str): The name of the test case.
         result_func (Callable): A function that returns the result to be tested.
         expected_result: The expected result from the result_func.
-        timeout (float): The maximum time in seconds allowed for the test to complete.
+        timeout_time (float): The maximum time in seconds allowed for the test to complete.
         fail_message (str, optional): A custom message to display on test failure. Default is None.
     """
 
-    def __init__(self, test_name: str, result_func: Callable, expected_result, timeout: float = 1, fail_message: str = None):
+    def __init__(self, test_name: str, result_func: Callable, expected_result, timeout_time: float = 1, fail_message: str = None):
         """Initialize the test case with the required attributes.
 
         :param test_name: The name of the test case.
         :param result_func: A function that returns the result to be tested.
         :param expected_result: The expected result from the result_func.
-        :param timeout: The maximum time in seconds allowed for the test to complete.
+        :param timeout_time: The maximum time in seconds allowed for the test to complete.
         :param fail_message: A custom message to display on test failure. Default is None.
         """
-        super().__init__(test_name, timeout, fail_message)
+        super().__init__(test_name, timeout_time, fail_message)
         self._result_func = result_func
         self._expected_result = expected_result
 
     def runTest(self):
         """Execute the test case and check the result against the expected result."""
-        @timeout(self._timeout)
+        @timeout(self._timeout_time)
         def exec_test():
             """Execute the test within a time limit defined by the timeout attribute."""
             self.assertEqual(self._expected_result, self._result_func(), self._fail_message)
