@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "school_grader"
+version = "4.0.4"
+authors = [
+  { name="Marc-Olivier Derouin", email="marcolivier.derouin@poulet-frit.com" },
+]
+description = "Testing framework for Python students code."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["testing", "test", "students", "school", "education", "framework", "python", "python3", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11"]
+
+[project.urls]
+"Homepage" = "https://github.com/school-grader/school-grader"
+"Bug Tracker" = "https://github.com/school-grader/school-grader/issues"
