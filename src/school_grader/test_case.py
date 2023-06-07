@@ -176,25 +176,34 @@ def run_tests(generate_html: bool = True):
     """
     if not TestCase.tests_case:
         raise ValueError("No test cases were added to the test suite.")
-
-    suite = unittest.TestSuite()
-    suite.addTests(TestCase.tests_case)
-
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('--extension', action='store_true')
     args = parser.parse_args()
 
-    if args.extension:
+    suite = unittest.TestSuite()
+    suite.addTests(TestCase.tests_case)
+
+    def json_runner() -> None:
         with patch('sys.stdout', new=StringIO()) as _:
             runner = unittest.TextTestRunner(resultclass=JSONTestResult)
             result: JSONTestResult = runner.run(suite)
         result.print_report()
-        return
 
-    if generate_html:
+    def html_runner() -> None:
         runner = unittest.TextTestRunner(resultclass=HTMLTestResult)
         result: HTMLTestResult = runner.run(suite)
         result.generate()
-    else:
+
+    def text_runner() -> None:
         runner = unittest.TextTestRunner()
         runner.run(suite)
+    
+    if args.extension:
+        json_runner()
+        return
+
+    if generate_html:
+        html_runner()
+    else:
+        text_runner()
