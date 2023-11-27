@@ -127,7 +127,7 @@ class Equal(Equality):
     """Abstract base class for equality validation."""
     @staticmethod
     @abstractmethod
-    def alter_expected_and_value_to_test(expected: str, value_to_test: str) -> Tuple[str, str]:
+    def preprocess_for_comparison(expected: str, value_to_test: str) -> Tuple[str, str]:
         """Alter the expected and value_to_test values before running the equality check.
 
         Args:
@@ -146,7 +146,7 @@ class Equal(Equality):
             value_to_test: The value to test for equality.
             fail_message: The message to display if the equality check fails.
         """
-        expected, value_to_test = self.alter_expected_and_value_to_test(self.expected, value_to_test)
+        expected, value_to_test = self.preprocess_for_comparison(self.expected, value_to_test)
         test_case.assertEqual(expected, value_to_test, fail_message)
 
 def CombineEqualities(*equalities: List[Equal]) -> Equal:
@@ -170,7 +170,7 @@ def CombineEqualities(*equalities: List[Equal]) -> Equal:
             super().__init__(expected)
 
         @staticmethod
-        def alter_expected_and_value_to_test(expected: str, value_to_test: str) -> Tuple[str, str]:
+        def preprocess_for_comparison(expected: str, value_to_test: str) -> Tuple[str, str]:
             """Alter the expected and value_to_test values before running the equality check.
 
             Args:
@@ -182,7 +182,7 @@ def CombineEqualities(*equalities: List[Equal]) -> Equal:
             for equality in equalities:
                 if not isinstance(equality, Equal):
                     raise TypeError(f"Expected an instance of Equal, but got {type(equality)}")
-                expected, value_to_test = equality.alter_expected_and_value_to_test(expected, value_to_test)
+                expected, value_to_test = equality.preprocess_for_comparison(expected, value_to_test)
             return expected, value_to_test
     return CombinedEquality
 
@@ -199,7 +199,7 @@ class CaseInsensitiveStringEquality(Equal):
         super().__init__(expected)
 
     @staticmethod
-    def alter_expected_and_value_to_test(expected: str, value_to_test: str) -> Tuple[str, str]:
+    def preprocess_for_comparison(expected: str, value_to_test: str) -> Tuple[str, str]:
         """Alter the expected and value_to_test values before running the equality check by converting both to lowercase.
 
         Args:
@@ -224,7 +224,7 @@ class WhiteSpaceInsensitiveEquality(Equal):
         super().__init__(expected)
 
     @staticmethod
-    def alter_expected_and_value_to_test(expected: str, value_to_test: str) -> Tuple[str, str]:
+    def preprocess_for_comparison(expected: str, value_to_test: str) -> Tuple[str, str]:
         """Alter the expected and value_to_test values before running the equality check by removing all whitespace.
 
         Args:
@@ -274,7 +274,7 @@ class ContainsEquality(Equal):
         return largest_substring
 
     @staticmethod
-    def alter_expected_and_value_to_test(expected: str, value_to_test: str) -> Tuple[str, str]:
+    def preprocess_for_comparison(expected: str, value_to_test: str) -> Tuple[str, str]:
         """Alter the expected and value_to_test values before running the equality check by keeping only the expected value if it is contained in the value to test.
 
         Args:
